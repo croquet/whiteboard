@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" charset="UTF-8" src="./croquet/croquet.min.js"></script>
+    <script type="module">
+import {makeMain, Library} from "./croquet/croquet-virtual-dom.js";
+
+import {drawing} from "./whiteboard.js";
+import apiKey from "./apiKey.js";
+let library = new Library();
+library.addLibrary("drawing", drawing);
+    
+let sessionName = Croquet.App.autoSession("q");
+window.document.addEventListener("wheel", evt => evt.preventDefault(), { passive: false, capture: false });
+window.onload = makeMain("drawing.drawingStart", {
+    tps: 0,
+    apiKey: apiKey,
+    appId: "io.croquet.publicWhiteboard",
+    eventRateLimit: 60,
+    password: "dummy",
+}, library, sessionName, null, false);
+    </script>
+  </head>
+  <body style="touch-action: none">
+    <div id="croquet-root" style="width: 100%; height: 100%"></div>
+  </body>
+</html>
