@@ -19,7 +19,7 @@ window.onload = makeMain("drawing.drawingStart", {
     apiKey: apiKey,
     appId: "io.croquet.publicWhiteboard",
     eventRateLimit: 60,
-    password: "dummy",
+    password: Croquet.App.autoPassword(),
 }, library, sessionName, null, false);
     </script>
   </head>
