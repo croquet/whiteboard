@@ -193,6 +193,11 @@ function propfind(request, response, pathname) {
 
 function handleRequest(request, response) {
     let urlObject = urlParser.parse(request.url, true);
+    if (path.normalize(decodeURIComponent(pathname)) !== decodeURIComponent(pathname)) {
+        response.statusCode = 403;
+        response.end();
+        return;
+    }
     let pathname = decodeURIComponent(urlObject.pathname);
     let method = request.method;
 
